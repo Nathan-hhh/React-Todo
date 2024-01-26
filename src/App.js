@@ -10,7 +10,8 @@ import { useState , useEffect} from 'react';
 function App() {
   const [dataArray, setDataArray] = useState([]);
   const [loaded, setLoaded] = useState(false); // why do we need this line
-  const randomNumber = Math.floor(Math.random() * 25); // there are only 30 items in data. 
+  const randomNumber = Math.floor(Math.random() * 20); // there are only 30 items in data. 
+  const randomL = Math.floor(Math.random() * 10); // there are only 30 items in data. 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,7 +22,7 @@ function App() {
         const response = await fetch('https://dummyjson.com/todos');
         const data = await response.json();
         
-        let slicedDataArray = data.todos.slice(randomNumber, randomNumber+5);
+        let slicedDataArray = data.todos.slice(randomNumber, randomNumber+randomL);
         console.log('slicedDataArray ', slicedDataArray);
         setDataArray(slicedDataArray);
         setLoaded(true);
