@@ -1,5 +1,5 @@
 //import logo from './logo.svg';
-import './App.css';
+import '../App.css';
 import TodoHeading from './TodoHeading';
 //import TodoHeading1 from './TodoHeading1';
 import Items from './Items';
