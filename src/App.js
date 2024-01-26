@@ -10,6 +10,7 @@ import { useState , useEffect} from 'react';
 function App() {
   const [dataArray, setDataArray] = useState([]);
   const [loaded, setLoaded] = useState(false); // why do we need this line
+  const randomNumber = Math.floor(Math.random() * 25); // there are only 30 items in data. 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,11 +20,8 @@ function App() {
 
         const response = await fetch('https://dummyjson.com/todos');
         const data = await response.json();
-        const randomNumber = Math.floor(Math.random() * 100);
-        console.log('randomNumber -- ', randomNumber)
-        //const slicedDataArray = data.todos.slice(randomNumber, randomNumber+5);
-        let slicedDataArray = data.todos.slice(0, 0+5);
-        //let slicedDataArray = data.todos.slice(randomNumber, randomNumber+5);
+        
+        let slicedDataArray = data.todos.slice(randomNumber, randomNumber+5);
         console.log('slicedDataArray ', slicedDataArray);
         setDataArray(slicedDataArray);
         setLoaded(true);
@@ -55,7 +53,6 @@ function App1({dataArray}) {
     console.log('useEffect runs ');
     // Code to run when dependencies change
   }, [dataArray]);
-
   
   function getSelectedState(taskType="all") {
 
