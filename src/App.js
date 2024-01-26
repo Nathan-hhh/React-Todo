@@ -15,11 +15,16 @@ function App() {
     const fetchData = async () => {
       try {
         console.log('useEffect runs in App');
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        //await new Promise(resolve => setTimeout(resolve, 1000));
 
         const response = await fetch('https://dummyjson.com/todos');
         const data = await response.json();
-        const slicedDataArray = data.todos.slice(0, 5);
+        const randomNumber = Math.floor(Math.random() * 100);
+        console.log('randomNumber -- ', randomNumber)
+        //const slicedDataArray = data.todos.slice(randomNumber, randomNumber+5);
+        let slicedDataArray = data.todos.slice(0, 0+5);
+        //let slicedDataArray = data.todos.slice(randomNumber, randomNumber+5);
+        console.log('slicedDataArray ', slicedDataArray);
         setDataArray(slicedDataArray);
         setLoaded(true);
       } catch (error) {
@@ -44,7 +49,7 @@ function App1({dataArray}) {
   const [type, setType] = useState("all");
   // const [num, setNum] = useState(state.length);
   const [toggleBtn, setToggleBtn]=useState(["true", "false", "false"]); // to set the appearance of toggle
-  const [selectedState, setSelectedState]=useState([]) ; 
+  //const [selectedState, setSelectedState]=useState([]) ; 
   useEffect(() => {
     if (state!==dataArray) {setState(dataArray)}
     console.log('useEffect runs ');
@@ -123,48 +128,6 @@ function App1({dataArray}) {
 
   );
 }
-
-/*
-function Items({selectedState, handleSave, handleChecked, handleDelete}) {
-  console.log('selectedState --', selectedState);
-  //setNum(selectedState.length);
-  return (
-    selectedState.map(
-      (item) => <AnItem key={generateRandomKey()} taskObject={item} handleSave={handleSave} handleChecked={handleChecked} handleDelete={handleDelete}/>
-    )
-  )
-};
-
-function AnItem({ taskObject, handleSave, handleChecked, handleDelete}) {
-  // taskObject is supposed to be one object in the state array
-  // console.log("taskObject -- ", taskObject)
-  const [isEditing, setIsEditing] = useState(false);
-  const [editText, setEditText] = useState(taskObject.todo);
-  if (!isEditing){
-    return (
-      <li className="todo"> 
-      <div className="stack-small"> 
-      <div className="c-cb"> 
-      <input id={taskObject.id} type="checkbox" data-key={taskObject.id} checked={taskObject.completed}  onChange={handleChecked}/> 
-      <label htmlFor={taskObject.id} className="todo-label" ><>{taskObject.todo}</></label></div> 
-      <div className="btn-group-2"> 
-      <button type="button" className="btn" data-key={taskObject.id} onClick={()=>setIsEditing(!isEditing)}>Edit</button> 
-      <button type="button" className="btn btn__danger" data-key={taskObject.id} onClick={handleDelete}>Delete</button> 
-      </div></div></li> 
-      )
-  } else {
-    return (
-      <li className="todo"><form className="stack-small" onSubmit={e=>e.preventDefault()}> 
-      <div className="form-group"> 
-      <label className="todo-label-2" htmlFor={taskObject.id}>New name for {taskObject.todo} </label> 
-      <input type="text" id={taskObject.id} className="todo-text" value={editText} onChange={e=>setEditText(e.target.value)}/></div> 
-      <div className="btn-group-2"> 
-      <button type="button" className="btn btn__cancel" onClick={()=>setIsEditing(!isEditing)}>Cancel</button> 
-      <button type="button" className="btn btn__save" onClick={()=>{handleSave(editText, taskObject.id);}}>Save</button></div></form></li>
-    )
-  }
-}
-*/
 
 function generateRandomKey(length=10) {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
